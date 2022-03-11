@@ -57,7 +57,7 @@ class Ui_MainWindow(object):
         self.textBrowser.setGeometry(QtCore.QRect(100, 380, 261, 141))
         self.textBrowser.setObjectName("textBrowser")
         self.label_erreure = QtWidgets.QLabel(self.centralwidget)
-        self.label_erreure.setGeometry(QtCore.QRect(420, 90, 241, 31))
+        self.label_erreure.setGeometry(QtCore.QRect(420, 90, 5000, 31))
         font = QtGui.QFont()
         font.setFamily("Arial Narrow")
         font.setPointSize(16)
@@ -79,6 +79,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.lineEdit_num_etudiant.setText(_translate("MainWindow", ""))
         self.label_num_etudiant.setText(_translate("MainWindow", "Numéro d\'étudiant"))
         self.label_nom_etudiant.setText(_translate("MainWindow", "Nom de  l\'étudiant"))
         self.pushButton.setText(_translate("MainWindow", "Valider"))
