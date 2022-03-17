@@ -112,7 +112,14 @@ class demoQt(QtWidgets.QMainWindow, interface.Ui_MainWindow):
     @pyqtSlot()
     def on_pushButton_4_clicked(self):
         # ajouter
-        print("sauv")
+        output = ""
+
+        for e in self.listEtudiant:
+            print(e.name)
+            output += e.__str__()
+        with open('save.txt', 'w') as f:
+            f.write(output)
+
 
 
 def testnom(text :str, window):
