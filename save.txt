@@ -1,0 +1,18 @@
+****************************************************
+
+le numéro de l'étudiant: 2030491
+le nom de l'étudiant: gabriel
+le programe de l'étudiant: programation
+
+****************************************************
+
+
+****************************************************
+
+le numéro de l'étudiant: 2030492
+le nom de l'étudiant: jeremy
+le programe de l'étudiant: résautique
+
+****************************************************
+
+
