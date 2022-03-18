@@ -4,17 +4,30 @@ import etudiant
 import interface
 
 from etudiant import Etudiant
-
+import quitter_window
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSlot
+
+
+listEtudiant = [Etudiant("gabriel", 2030491,"programation",8),Etudiant("jeremy", 2030492,"résautique",48)]
+
+
+def main():
+    app = QtWidgets.QApplication(sys.argv)
+    form = demoQt()
+    quitter_form = quitter_window.quitterQt()
+    form.show()
+    quitter_form.show()
+    app.exec()
 
 class demoQt(QtWidgets.QMainWindow, interface.Ui_MainWindow):
     def __init__(self, parent=None):
         super(demoQt, self).__init__(parent)
         self.setupUi(self)
-        self.listEtudiant = [Etudiant("gabriel", 2030491,"programation"),Etudiant("jeremy", 2030492,"résautique")]
 
-        for etudiant in self.listEtudiant:
+
+
+        for etudiant in listEtudiant:
             self.textBrowser.setText(self.textBrowser.toPlainText() + etudiant.__str__())
 
 
@@ -22,9 +35,7 @@ class demoQt(QtWidgets.QMainWindow, interface.Ui_MainWindow):
 
     @pyqtSlot()
     def on_pushButton_clicked(self):
-        date = self.dateEdit.text().split("-")[0]
-
-
+        age = Age(self)
 
         nom = self.lineEdit_nom_etudiant.text()
         num = self.lineEdit_num_etudiant.text()
@@ -37,7 +48,7 @@ class demoQt(QtWidgets.QMainWindow, interface.Ui_MainWindow):
             if testnom(nom, self) and testnum(num,self):
 
                 print("allo")
-                self.listEtudiant.append(etudiant.Etudiant(nom, num, str(self.comboBox.currentText())))
+                listEtudiant.append(etudiant.Etudiant(nom, num, str(self.comboBox.currentText()),age))
 
 
 
@@ -49,8 +60,9 @@ class demoQt(QtWidgets.QMainWindow, interface.Ui_MainWindow):
     @pyqtSlot()
     def on_pushButton_supprimer_clicked(self):
         #  suprimer
+
         as_find = False
-        for etudiant in self.listEtudiant:
+        for etudiant in listEtudiant:
 
             if str(etudiant.num) == self.lineEdit_num_etudiant.text():
                 print("***")
@@ -59,11 +71,11 @@ class demoQt(QtWidgets.QMainWindow, interface.Ui_MainWindow):
                 print(self.lineEdit_num_etudiant.text())
                 print("***")
                 as_find = True
-                self.listEtudiant.remove(etudiant)
+                listEtudiant.remove(etudiant)
 
                 output = ""
 
-                for etudiant in self.listEtudiant:
+                for etudiant in listEtudiant:
                     output += etudiant.__str__()
 
                 self.textBrowser.setText(output)
@@ -79,8 +91,8 @@ class demoQt(QtWidgets.QMainWindow, interface.Ui_MainWindow):
     def on_pushButton_3_clicked(self):
         as_find = False
         #modifier
-        listEtudiant_T = []
-        for etudiant in self.listEtudiant:
+
+        for etudiant in listEtudiant:
 
             if str(etudiant.num) == self.lineEdit_num_etudiant.text():
                 nom = self.lineEdit_nom_etudiant.text()
@@ -88,9 +100,8 @@ class demoQt(QtWidgets.QMainWindow, interface.Ui_MainWindow):
                 if testnom(nom, self):
 
 
-
                     etudiant.name = nom
-
+                    etudiant.age = Age(self)
 
                     self.lineEdit_nom_etudiant.setText("")
                     self.lineEdit_num_etudiant.setText("")
@@ -99,19 +110,19 @@ class demoQt(QtWidgets.QMainWindow, interface.Ui_MainWindow):
 
                 output = ""
 
-                for e in self.listEtudiant:
+                for e in listEtudiant:
                     print(e.name)
                     output += e.__str__()
 
 
                 self.textBrowser.setText(output)
 
-            listEtudiant_T.append(etudiant)
+
 
         if as_find != True:
             self.label_erreure.setText("Le numeros d'étudiant ne corespond a aucun etudiant")
 
-        self.listEtudiant = listEtudiant_T
+
 
     @pyqtSlot()
     def on_pushButton_4_clicked(self):
@@ -126,6 +137,10 @@ class demoQt(QtWidgets.QMainWindow, interface.Ui_MainWindow):
 
 
 
+def Age(self):
+    yearofbirth = self.dateEdit.text().split("-")[0]
+
+    return str(2022 - int(yearofbirth))
 def testnom(text :str, window):
 
     if not text.replace(" ","").isalpha():
@@ -141,11 +156,8 @@ def testnum(text, window):
         return False
     return True
 
-def main():
-        app = QtWidgets.QApplication(sys.argv)
-        form = demoQt()
-        form.show()
-        app.exec()
+
+
 
 
 
