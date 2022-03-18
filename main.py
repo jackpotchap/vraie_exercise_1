@@ -22,6 +22,10 @@ class demoQt(QtWidgets.QMainWindow, interface.Ui_MainWindow):
 
     @pyqtSlot()
     def on_pushButton_clicked(self):
+        date = self.dateEdit.text().split("-")[0]
+
+
+
         nom = self.lineEdit_nom_etudiant.text()
         num = self.lineEdit_num_etudiant.text()
 
