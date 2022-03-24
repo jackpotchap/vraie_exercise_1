@@ -1,5 +1,7 @@
 import sys
 
+from PyQt5.QtGui import QStandardItemModel, QStandardItem
+
 import etudiant
 import interface
 
@@ -7,7 +9,7 @@ import listWindow
 from etudiant import Etudiant
 import quitter_window
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PySide2.QtGui import QStandardItem, QStandardItemModel
+
 from PyQt5.QtCore import pyqtSlot
 
 
@@ -23,8 +25,11 @@ def main():
     app.exec()
 
     dialogue = Fenetrelistview()
+    dialogue.setWindowTitle("list etudiant")
+
+
     model = QStandardItemModel()
-    print(model)
+
     dialogue.listView.setModel(model)
 
     for e in listEtudiant:
@@ -162,7 +167,11 @@ class Fenetrelistview(QtWidgets.QDialog, listWindow.Ui_Dialog):
 
     @pyqtSlot()
     def on_pushButton_ok_clicked(self):
-        self.close()
+        print("ok")
+
+
+
+
 
 
 def Age(self):
