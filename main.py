@@ -3,9 +3,11 @@ import sys
 import etudiant
 import interface
 
+import listWindow
 from etudiant import Etudiant
 import quitter_window
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PySide2.QtGui import QStandardItem, QStandardItemModel
 from PyQt5.QtCore import pyqtSlot
 
 
@@ -15,15 +17,28 @@ listEtudiant = [Etudiant("gabriel", 2030491,"programation",8),Etudiant("jeremy",
 def main():
     app = QtWidgets.QApplication(sys.argv)
     form = demoQt()
-    quitter_form = quitter_window.quitterQt()
+
     form.show()
-    quitter_form.show()
+
     app.exec()
+
+    dialogue = Fenetrelistview()
+    model = QStandardItemModel()
+    print(model)
+    dialogue.listView.setModel(model)
+
+    for e in listEtudiant:
+        item = QStandardItem(e.name)
+        model.appendRow(item)
+
+    dialogue.show()
+    dialogue.exec_()
 
 class demoQt(QtWidgets.QMainWindow, interface.Ui_MainWindow):
     def __init__(self, parent=None):
         super(demoQt, self).__init__(parent)
         self.setupUi(self)
+
 
 
 
@@ -127,14 +142,27 @@ class demoQt(QtWidgets.QMainWindow, interface.Ui_MainWindow):
     @pyqtSlot()
     def on_pushButton_4_clicked(self):
         # ajouter
+
         output = ""
 
-        for e in self.listEtudiant:
+        for e in listEtudiant:
             print(e.name)
             output += e.__str__()
         with open('save.txt', 'w') as f:
             f.write(output)
 
+
+
+
+
+class Fenetrelistview(QtWidgets.QDialog, listWindow.Ui_Dialog):
+    def __init__(self, parent=None):
+        super(Fenetrelistview, self).__init__(parent)
+        self.setupUi(self)
+
+    @pyqtSlot()
+    def on_pushButton_ok_clicked(self):
+        self.close()
 
 
 def Age(self):
